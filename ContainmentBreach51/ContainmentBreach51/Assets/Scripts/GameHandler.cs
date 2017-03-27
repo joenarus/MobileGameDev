@@ -83,7 +83,7 @@ public class GameHandler : MonoBehaviour {
 		if (x == 1) {
 		
 			GameObject clone = Instantiate (building1, Input.mousePosition, Quaternion.identity);
-			clone.transform.parent = GameObject.Find ("Buildings").transform;
+			clone.transform.parent = GameObject.Find ("Enemies").transform;
 			currentBuilding = clone.GetComponent<Builder> ();
 		}
 	}

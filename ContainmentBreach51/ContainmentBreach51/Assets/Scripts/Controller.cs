@@ -12,20 +12,17 @@ public class Controller : MonoBehaviour {
 	public Text Currency;
 	public Text Stamina;
 	public Text Exp;
-	public Text Tower1;
-	public Text Tower2;
-	public Text Tower3;
+	public Text LevelText;
 	public bool init = false;
 	bool updated = false;
 	GameObject player;
+	private int active_agent;
 
 	// Use this for initialization
 	void Start () {
-		
+		active_agent = 0;
 		player = GameObject.Find ("PlayerInfo");
-		Tower1.text = "" + player.GetComponent<Player> ().realPlayer.TowerN;
-		Tower2.text = "" + player.GetComponent<Player> ().realPlayer.TowerS;
-		Tower3.text = "" + player.GetComponent<Player> ().realPlayer.TowerF;
+		LevelText.text = "" + player.GetComponent<Player> ().realPlayer.Agent1;
 		if (!init) {
 			init = true;
 			updated = true;
@@ -39,9 +36,7 @@ public class Controller : MonoBehaviour {
 			Currency.text = "Gold: " + player.GetComponent<Player> ().realPlayer.Currency;
 			Stamina.text = "Stamina: " + player.GetComponent<Player> ().realPlayer.Stamina;
 			Exp.text = "Exp: " + player.GetComponent<Player> ().realPlayer.Exp;
-			Tower1.text = "" + player.GetComponent<Player> ().realPlayer.TowerN;
-			Tower2.text = "" + player.GetComponent<Player> ().realPlayer.TowerS;
-			Tower3.text = "" + player.GetComponent<Player> ().realPlayer.TowerF;
+			LevelText.text = "" + player.GetComponent<Player> ().realPlayer.Agent1;
 			player.GetComponent<Player> ().updateData ();
 			updated = false;
 		}
@@ -49,7 +44,7 @@ public class Controller : MonoBehaviour {
 
 	public void activateShop() {
 		foreach (Canvas c in canvases) {
-			if (c.name != "PurchaseCanvas") {
+			if (c.name != "TowerCanvas") {
 				c.gameObject.SetActive (false);
 			} else {
 				c.gameObject.SetActive (true);
@@ -57,13 +52,34 @@ public class Controller : MonoBehaviour {
 		}
 	}
 
-	public void activateUpgradeMenu() {
+	public void activateUpgradeMenu(int x) {
+		
 		foreach (Canvas c in canvases) {
 			if (c.name != "UpgradeCanvas") {
 				c.gameObject.SetActive (false);
 			} else {
 				c.gameObject.SetActive (true);
 			}
+		}
+
+
+		if (x == 1) {
+			LevelText.text = "" + player.GetComponent<Player> ().realPlayer.Agent1;
+			active_agent = 1;
+		}
+		else if(x == 2) {
+			LevelText.text = "" + player.GetComponent<Player> ().realPlayer.Agent2;
+			active_agent = 2;
+		}
+
+		else if(x == 3) {
+			LevelText.text = "" + player.GetComponent<Player> ().realPlayer.Agent3;
+			active_agent = 3;
+		}
+
+		else if(x == 4) {
+			LevelText.text = "" + player.GetComponent<Player> ().realPlayer.Agent4;
+			active_agent = 4;
 		}
 	}
 
@@ -85,19 +101,7 @@ public class Controller : MonoBehaviour {
 
 	public void UpgradeTower(string x) {
 		if (player.GetComponent<Player> ().realPlayer.Currency >= 5) {
-			int temp = 0;
-			if (x.Equals ("normal")) {
-				player.GetComponent<Player> ().realPlayer.TowerN+=1;
-				Tower1.text = ""+ player.GetComponent<Player> ().realPlayer.TowerN;
-			
-			} else if (x.Equals ("slow")) {
-				player.GetComponent<Player> ().realPlayer.TowerS+=1;
-				Tower2.text = ""+ player.GetComponent<Player> ().realPlayer.TowerS;
-			} else if (x.Equals ("fast")) {
-				player.GetComponent<Player> ().realPlayer.TowerF+=1;
-				Tower3.text = ""+ player.GetComponent<Player> ().realPlayer.TowerF;
-			}
-			updated = true;
+//			
 			player.GetComponent<Player> ().realPlayer.Currency -= 5;
 		}
 	}

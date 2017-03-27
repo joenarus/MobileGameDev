@@ -22,18 +22,18 @@ public class Builder : MonoBehaviour, IPointerClickHandler {
 	
 	// Update is called once per frame
 	void Update () {
-		if (building) {
-			Vector3 target = PlayerCamera.ScreenToWorldPoint (Input.mousePosition);
-			target.z = 0;
-			transform.position = target;
-		} 
-		else { 
+//		if (building) {
+//			Vector3 target = PlayerCamera.ScreenToWorldPoint (Input.mousePosition);
+//			target.z = 0;
+//			transform.position = target;
+//		} 
+
 			if (!activated) {
 				r.ActivateReload ();
 				activated = true;
 			}
 
-		}
+
 
 
 	}
