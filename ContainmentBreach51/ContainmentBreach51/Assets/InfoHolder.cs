@@ -7,6 +7,9 @@ public class InfoHolder : MonoBehaviour {
 	public Dictionary<string, Ability> abilities;
 	public Dictionary<string, Tower> towers;
 	public Dictionary<string, Enemy> enemies;
+	public Sprite[] towerSprites;
+
+
 	// Use this for initialization
 	void Start () {
 		DontDestroyOnLoad (gameObject);
@@ -26,7 +29,7 @@ public class InfoHolder : MonoBehaviour {
 						           CloudDataRetrieve.abilities [i].healPower,
 						           CloudDataRetrieve.abilities [i].range,
 						           CloudDataRetrieve.abilities [i].taunt,
-						           CloudDataRetrieve.abilities [i].AoE);
+						CloudDataRetrieve.abilities [i].AoE, CloudDataRetrieve.abilities[i].info, 1);
 					abilities.Add (a.Ability_name, a);
 				}
 				for (int j = 0; j < CloudDataRetrieve.enemies.Length; j++) {
@@ -38,7 +41,11 @@ public class InfoHolder : MonoBehaviour {
 						         CloudDataRetrieve.enemies [j].attackSpeed, 
 						         CloudDataRetrieve.enemies [j].attackPower, 
 						         CloudDataRetrieve.enemies [j].taunt,
-						         CloudDataRetrieve.enemies [j].speed);
+						         CloudDataRetrieve.enemies [j].speed, 
+						CloudDataRetrieve.enemies [j].value, 
+						CloudDataRetrieve.enemies [j].maxAttack,
+						CloudDataRetrieve.enemies [j].maxRange,
+						CloudDataRetrieve.enemies [j].MaxSpeed);
 					enemies.Add (e.entity_name, e); 
 
 				}
@@ -51,10 +58,82 @@ public class InfoHolder : MonoBehaviour {
 						         CloudDataRetrieve.towers [k].attackSpeed, 
 						         CloudDataRetrieve.towers [k].attackPower, 
 						         CloudDataRetrieve.towers [k].taunt,
-						         CloudDataRetrieve.towers [k].speed);
+						         CloudDataRetrieve.towers [k].speed,
+						CloudDataRetrieve.towers [k].maxAttack,
+						CloudDataRetrieve.towers [k].maxRange,
+						CloudDataRetrieve.towers [k].MaxSpeed);
+					Debug.Log (t.entity_name);
 					towers.Add (t.entity_name, t); 
+					if (k == 0) {
+						t.level = GameObject.Find ("PlayerInfo").GetComponent<Player> ().realPlayer.Agent1;
+						t.addAbility (abilities["Armor Piercing"], GameObject.Find ("PlayerInfo").GetComponent<Player> ().realPlayer.Ability1);
+						t.addPassive (abilities["Range+"], GameObject.Find ("PlayerInfo").GetComponent<Player> ().realPlayer.Passive1);
+					} else if (k == 1) {
+						t.level = GameObject.Find ("PlayerInfo").GetComponent<Player> ().realPlayer.Agent2;
+						t.addAbility (abilities ["Armor Piercing"], GameObject.Find ("PlayerInfo").GetComponent<Player> ().realPlayer.Ability2);
+						t.addPassive (abilities ["Range+"], GameObject.Find ("PlayerInfo").GetComponent<Player> ().realPlayer.Passive2);
+					} else if (k == 2) {
+						t.level = GameObject.Find ("PlayerInfo").GetComponent<Player> ().realPlayer.Agent3;
+						t.addAbility (abilities ["Armor Piercing"], GameObject.Find ("PlayerInfo").GetComponent<Player> ().realPlayer.Ability3);
+						t.addPassive (abilities ["Range+"], GameObject.Find ("PlayerInfo").GetComponent<Player> ().realPlayer.Passive3);
+					} else if (k == 3) {
+						t.level = GameObject.Find ("PlayerInfo").GetComponent<Player> ().realPlayer.Agent4;
+						t.addAbility (abilities ["Armor Piercing"], GameObject.Find ("PlayerInfo").GetComponent<Player> ().realPlayer.Ability4);
+						t.addPassive (abilities ["Range+"], GameObject.Find ("PlayerInfo").GetComponent<Player> ().realPlayer.Passive4);
+					}
 				}
+
 			}
 		}
 	}
+
+//	public void LevelUp(Tower t) {
+//		t.level++;
+//		if (t.entity_name.Equals ("Agent1")) {
+//			GameObject.Find ("PlayerInfo").GetComponent<Player> ().realPlayer.Agent1++;
+//		}
+//		else if (t.entity_name.Equals ("Agent2")) {
+//			GameObject.Find ("PlayerInfo").GetComponent<Player> ().realPlayer.Agent2++;
+//		}
+//		else if (t.entity_name.Equals ("Agent3")) {
+//			GameObject.Find ("PlayerInfo").GetComponent<Player> ().realPlayer.Agent3++;
+//		}
+//		else if (t.entity_name.Equals ("Agent4")) {
+//			GameObject.Find ("PlayerInfo").GetComponent<Player> ().realPlayer.Agent4++;
+//		}
+//		GameObject.Find ("PlayerInfo").GetComponent<Player> ().updateData ();
+//
+//	}
+//	public void AbilityUp(Tower t) {
+//		if (t.entity_name.Equals ("Agent1")) {
+//			GameObject.Find ("PlayerInfo").GetComponent<Player> ().realPlayer.Ability1++;
+//		}
+//		else if (t.entity_name.Equals ("Agent2")) {
+//			GameObject.Find ("PlayerInfo").GetComponent<Player> ().realPlayer.Ability2++;
+//		}
+//		else if (t.entity_name.Equals ("Agent3")) {
+//			GameObject.Find ("PlayerInfo").GetComponent<Player> ().realPlayer.Ability3++;
+//		}
+//		else if (t.entity_name.Equals ("Agent4")) {
+//			GameObject.Find ("PlayerInfo").GetComponent<Player> ().realPlayer.Ability4++;
+//		}
+//		GameObject.Find ("PlayerInfo").GetComponent<Player> ().updateData ();
+//	}
+//	public void PassiveUp(Tower t) {
+//		if (t.entity_name.Equals ("Agent1")) {
+//			GameObject.Find ("PlayerInfo").GetComponent<Player> ().realPlayer.Passive1++;
+//		}
+//		else if (t.entity_name.Equals ("Agent2")) {
+//			GameObject.Find ("PlayerInfo").GetComponent<Player> ().realPlayer.Passive2++;
+//		}
+//		else if (t.entity_name.Equals ("Agent3")) {
+//			GameObject.Find ("PlayerInfo").GetComponent<Player> ().realPlayer.Passive3++;
+//		}
+//		else if (t.entity_name.Equals ("Agent4")) {
+//			GameObject.Find ("PlayerInfo").GetComponent<Player> ().realPlayer.Passive4++;
+//		}
+//		GameObject.Find ("PlayerInfo").GetComponent<Player> ().updateData ();
+//
+//	}
+
 }

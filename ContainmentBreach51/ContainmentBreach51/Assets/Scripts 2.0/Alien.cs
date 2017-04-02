@@ -12,6 +12,7 @@ public class Alien : MonoBehaviour {
 	public Transform currentTarget;
 	public Image healthbar;
 	public int maxHealth;
+	public int currentHealth;
 	public List<Hero> heroes;
 	public GameObject Range;
 
@@ -34,7 +35,7 @@ public class Alien : MonoBehaviour {
 			GameObject.Find ("InfoHolder").GetComponent<InfoHolder>().enemies.TryGetValue("Boss", out information);
 		}
 		maxHealth = information.health;
-
+		currentHealth = maxHealth;
 		final = new Vector3 (transform.position.x, -6, 0);
 
 		if (information.passive != null) {
@@ -63,9 +64,9 @@ public class Alien : MonoBehaviour {
 
 
 	public void LoseHealth(int damage, Transform t) {
-		information.TakeDamage (damage);
+		currentHealth -= damage - information.armor;
 		healthbar.fillAmount = (float)information.health / (float)maxHealth;
-		if (information.health <= 0) {
+		if (currentHealth <= 0) {
 			Die (t);
 		}
 		taunted = true;

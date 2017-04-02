@@ -1,11 +1,13 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts 2.0/Towers/Hero.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/UpgradeController.cs">
     <Files>
-      <File FileName="Assets/Scripts 2.0/Towers/Hero.cs" Line="36" Column="51" />
-      <File FileName="Assets/Scripts/Building.cs" Line="48" Column="3" />
-      <File FileName="Assets/Player.cs" Line="1" Column="1" />
-      <File FileName="Assets/HeroRange.cs" Line="32" Column="4" />
+      <File FileName="Assets/InfoHolder.cs" Line="137" Column="5" />
+      <File FileName="Assets/Scripts/Controller.cs" Line="181" Column="46" />
+      <File FileName="Assets/Player.cs" Line="39" Column="1" />
+      <File FileName="Assets/Scripts 2.0/Towers/Hero.cs" Line="57" Column="4" />
+      <File FileName="Assets/Scripts/UpgradeController.cs" Line="46" Column="57" />
+      <File FileName="Assets/Scripts 2.0/Data/Entity.cs" Line="39" Column="24" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

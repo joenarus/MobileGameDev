@@ -11,6 +11,7 @@ public class Hero : MonoBehaviour {
 	public Transform currentTarget;
 	public Image healthbar;
 	public int maxHealth;
+	public int currentHealth;
 
 	bool attacking = false;
 	// Use this for initialization
@@ -34,7 +35,8 @@ public class Hero : MonoBehaviour {
 			Range.GetComponent<CapsuleCollider> ().radius = (information.range);
 		}
 		maxHealth = information.health;
-		healthbar.fillAmount = (float)information.health / (float)maxHealth;
+		currentHealth = maxHealth;
+		healthbar.fillAmount = (float)currentHealth / (float)maxHealth;
 	}
 	
 	// Update is called once per frame
@@ -62,7 +64,6 @@ public class Hero : MonoBehaviour {
 				break;
 			}
 		}
-
 	}
 
 	public void Attack() {
@@ -71,9 +72,9 @@ public class Hero : MonoBehaviour {
 	}
 
 	public void LoseHealth(int damage) {
-		information.TakeDamage (damage);
-		healthbar.fillAmount = (float)information.health / (float)maxHealth;
-		if (information.health <= 0) {
+		currentHealth -= damage - information.armor;
+		healthbar.fillAmount = (float)currentHealth / (float)maxHealth;
+		if (currentHealth <= 0) {
 			Die ();
 		}
 	}

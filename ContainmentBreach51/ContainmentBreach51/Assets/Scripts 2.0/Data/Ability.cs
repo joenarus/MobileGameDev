@@ -15,6 +15,16 @@ public class Ability  {
 		}
 	}
 
+	string ability_info;
+	public string Ability_info {
+		get {
+			return ability_info;
+		}
+		set {
+			ability_info = value;
+		}
+	}
+
 	int damagepower;
 	public int Damagepower {
 		get {
@@ -97,12 +107,14 @@ public class Ability  {
  
 
 
-	public Ability(string _name, int damage, int heal, float _range, int _taunt, int _aoe) {
+	public Ability(string _name, int damage, int heal, float _range, int _taunt, int _aoe, string info, int _level) {
 		ability_name = _name;
 		damagepower = damage;
 		healPower = heal;
 		range = _range;
 		aoe = _aoe;
+		ability_info = info;
+		level = _level;
 		if (_taunt == 0)
 			taunt = false;
 		else
@@ -110,8 +122,8 @@ public class Ability  {
 	}
 
 		
-	public void updateAbility(int _level) {
-		
+	public void updateAbility() {
+		level++;
 
 	}
 

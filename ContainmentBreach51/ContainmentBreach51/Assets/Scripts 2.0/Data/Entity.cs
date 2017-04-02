@@ -13,6 +13,10 @@ public abstract class Entity : MonoBehaviour {
 	public int attackPower;
 	public bool taunt;
 	public int speed;
+	public int maxAttack;
+	public float maxRange;	
+	public float MaxSpeed;
+
 
 	public Entity currentTarget;
 
@@ -20,7 +24,8 @@ public abstract class Entity : MonoBehaviour {
 
 	}
 
-	public Entity(int _health, int _armor, int _level, string _name, float _range, float _attackSpeed, int _attackPower, int _taunt, int _speed) {
+	public Entity(int _health, int _armor, int _level, string _name, float _range, float _attackSpeed, int _attackPower, int _taunt, int _speed, 
+		int _maxAttack, float _maxRange, float _MaxSpeed) {
 		health = _health;
 		armor = _armor;
 		level = _level;
@@ -29,6 +34,10 @@ public abstract class Entity : MonoBehaviour {
 		attackSpeed = _attackSpeed;
 		attackPower = _attackPower;
 		speed = _speed;
+		maxAttack = _maxAttack;
+		maxRange = _maxRange;
+		MaxSpeed = _MaxSpeed;
+
 		if (_taunt == 0)
 			taunt = false;
 		else

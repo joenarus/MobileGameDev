@@ -6,11 +6,13 @@ public class Tower : Entity {
 
 
 	public Ability passive;
+	int levelPassive = 0;
+	int levelActive = 0;
 	public Ability activateable;
 
 
-	public Tower(int _health, int _armor, int _level, string _name, float _range, float _attackSpeed, int _attackPower, int _taunt, int _speed)
-		: base(_health,_armor,_level, _name, _range, _attackSpeed, _attackPower, _taunt, _speed) {
+	public Tower(int _health, int _armor, int _level, string _name, float _range, float _attackSpeed, int _attackPower, int _taunt, int _speed, int _maxAttack, float _maxRange, float _MaxSpeed)
+		: base(_health,_armor,_level, _name, _range, _attackSpeed, _attackPower, _taunt, _speed, _maxAttack, _maxRange, _MaxSpeed) {
 		
 	}
 
@@ -26,11 +28,20 @@ public class Tower : Entity {
 		
 	}
 
-	public override void ActivateAbility (Entity target, Ability a)
-	{
-		
+	public void addAbility(Ability a, int level) {
+		activateable = a;
+		levelActive = level;
 	}
 
+	public void addPassive(Ability a, int level) {
+		passive = a;
+		levelPassive = level;
+	}
+
+	public override void ActivateAbility(Entity target, Ability a) {
+
+	}
+		
 
 	#endregion
 }

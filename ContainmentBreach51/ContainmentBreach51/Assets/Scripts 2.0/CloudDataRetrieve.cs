@@ -16,13 +16,22 @@ public struct PlayerInfo
 	public int Agent2;
 	public int Agent3;
 	public int Agent4;
+	public int Passive1;
+	public int Passive2;
+	public int Passive3;
+	public int Passive4;
+	public int Ability1;
+	public int Ability2;
+	public int Ability3;
+	public int Ability4;
 }
 
 
 [System.Serializable]
 public struct AbilityInfo
 {
-	public string name;	
+	public string name;
+	public string info;
 	public int attackPower;	
 	public float range;	
 	public int healPower;	
@@ -41,6 +50,11 @@ public struct EntityInfo
 	public int taunt;
 	public int speed;
 	public int armor;
+	public int value;
+	public int maxAttack;
+	public float maxRange;	
+	public float MaxSpeed;
+
 }
 
 
@@ -63,6 +77,7 @@ public class CloudDataRetrieve : MonoBehaviour {
 	public static bool loaded = false;
 	public static bool startcreating = false;
 	public static bool playerloaded = false;
+	public static bool updated = true;
 	public static bool loadVal = true;
 	public static int loadingbarVal = 0;
 	public Button Enter;
@@ -70,6 +85,7 @@ public class CloudDataRetrieve : MonoBehaviour {
 	public Slider loadingSlider;
 	// Use this for initialization
 	void Start () {
+		startcreating = false;
 		DontDestroyOnLoad (gameObject.transform);			
 		CloudConnectorCore.processedResponseCallback.AddListener (ParseData);
 
@@ -81,19 +97,19 @@ public class CloudDataRetrieve : MonoBehaviour {
 			if (loadVal) {
 				loadVal = false;
 				if (finished3) {
-					loadingbarVal = 75;
+					loadingbarVal = 100;
 					grabPlayerData ();
 				}
 				else if (finished2) {
-					loadingbarVal = 50;
+					loadingbarVal = 75;
 					getAbilityData ();
 				}
 				else if (finished1) {
-					loadingbarVal = 25;
+					loadingbarVal = 50;
 					getTowerData ();
 				}
 				else if (!finished1) {
-					loadingbarVal = 0;
+					loadingbarVal = 25;
 					getEnemyData ();
 				}
 				loadingSlider.value = loadingbarVal;
